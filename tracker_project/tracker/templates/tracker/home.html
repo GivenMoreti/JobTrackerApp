@@ -1,0 +1,46 @@
+{% extends 'tracker/base.html' %}
+{% block content %}
+        <div class="container">
+            <table class="table mb-2 " id="main-rows">
+                <h1>{% if jobs_count %}
+                  <span style="color:blue;"> Number of Jobs: {{ jobs_count}}</span>
+                   
+                {% else %}
+                    No Jobs
+                {% endif %}
+            </h1>
+                
+                <thead >
+                  <tr >
+                    <th scope="col">Driver</th>
+                    <th scope="col">Car Name</th>
+                    <th scope="col">Mileage(km)</th>
+                    <th scope="col">Issue</th>
+                    <th scope="col">Describe issue</th>
+                    <th scope="col">Date added</th>
+                    <th scope="col">Date Changed</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for tracker in tracker %}
+                  <tr >
+                    <td>{{ tracker.driver}}</td>
+                    <td>{{ tracker.car_name }}</td>
+                    <td>{{ tracker.mileage }} </td>
+                    <td>{{ tracker.issue }}</td>
+                    <td>{{ tracker.describe_issues}}</td>
+                    <td>{{ tracker.date_added}}</td>
+                    <td>{{ tracker.date_edited}}</td>
+                
+                    <td><a href="{% url 'update_tracker' tracker.id %}" class="btn btn-outline-warning btn-sm" >Edit</a></td>
+                    <td><a href="{% url 'complete' tracker.id %}"><input type="button" class="btn btn-outline-danger btn-sm" value="Complete"></td></a>
+                    <td><a href="{% url 'add_job' %}" class="btn btn-outline-secondary btn-sm">Add Job</a></td>
+                </tr>
+                 {% endfor %}
+                </tbody>
+              </table>
+        </div>
+{% endblock %}
