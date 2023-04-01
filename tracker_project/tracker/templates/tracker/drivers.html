@@ -29,9 +29,9 @@
         <td>{{driver.first_name}}</td>
         <td>{{driver.last_name}}</td>
         <td>{{driver.email}}</td>
-        <td><a href="{% url 'update_driver' driver.id %}" class="btn btn-outline-warning btn-sm" >Edit</a></td>
-        <td><a href="{% url 'delete_driver' driver.id %}"><input type="button" class="btn btn-outline-danger btn-sm" value="Delete Driver"></td></a>
-        <td><a href="{% url 'add_driver' %}" class="btn btn-outline-secondary btn-sm">Add New</a></td>
+        <td><a href="{% url 'update_driver' driver.id %}" class="btn btn-warning btn-sm" >Edit</a></td>
+        <td><a href="{% url 'delete_driver' driver.id %}"><input type="button" class="btn btn-danger btn-sm" value="Remove"></td></a>
+        <td><a href="{% url 'add_driver' %}" class="btn btn-secondary btn-sm">Add New</a></td>
         </tr>
         {% endfor %} 
     </tbody>
