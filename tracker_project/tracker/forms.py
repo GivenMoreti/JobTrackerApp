@@ -16,3 +16,8 @@ class ChatForm(forms.ModelForm):
     class Meta:
         model = Chat 
         fields = "__all__" 
+
+
+
+class SearchForm(forms.Form):
+    query = forms.CharField(max_length=100)

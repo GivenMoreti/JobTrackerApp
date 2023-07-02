@@ -1,5 +1,10 @@
 {% extends 'tracker/base.html' %}
 {% block content %}
+<style>
+  .unauthenticated_users{
+    color: white;
+  }
+</style>
         <div class="container">
           <h3>Your handy digital tool</h3>
             <table class="table mb-2 " id="main-rows">
@@ -11,16 +16,17 @@
                     No Jobs
                 {% endif %}
             </h1>
-                
+            {% if user.is_authenticated %}
                 <thead >
+                  
                   <tr >
                     <th scope="col">Driver</th>
-                    <th scope="col">Car Name</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Mileage(km)</th>
                     <th scope="col">Issue</th>
-                    <th scope="col">Describe issue</th>
-                    <th scope="col">Date added</th>
-                    <th scope="col">Date Changed</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Added</th>
+                    <th scope="col">Modified</th>
                     <th scope="col">Action</th>
                     <th scope="col">Action</th>
                     <th scope="col">Action</th>
@@ -34,8 +40,8 @@
                     <td>{{ tracker.mileage }} </td>
                     <td>{{ tracker.issue }}</td>
                     <td>{{ tracker.describe_issues}}</td>
-                    <td>{{ tracker.date_added}}</td>
-                    <td>{{ tracker.date_edited}}</td>
+                    <td>{{ tracker.date_added|timesince}}</td>
+                    <td>{{ tracker.date_edited|timesince}}</td>
                 
                     <td><a href="{% url 'update_tracker' tracker.id %}" class="btn btn-warning btn-sm" >Edit</a></td>
                     <td><a href="{% url 'complete' tracker.id %}"><input type="button" class="btn btn-primary btn-sm" value="Complete"></td></a>
@@ -44,5 +50,14 @@
                  {% endfor %}
                 </tbody>
               </table>
+              {%else%}
+              <div class="unauthenticated_users">
+                <h1>See our services</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis magni velit porro laboriosam quo labore sequi vitae eveniet facilis deserunt est error reprehenderit aperiam repellendus sint optio eaque, delectus possimus?
+                Sapiente commodi corrupti animi quod fugit voluptate expedita dolores! Esse animi odit voluptatum aut. Unde maxime cupiditate reiciendis iusto nesciunt dicta accusamus molestiae corporis, possimus odit, enim labore eveniet molestias?
+                Est harum nesciunt aut dolor dignissimos rem officia nihil omnis blanditiis natus, hic, eveniet veniam accusamus. Officiis vitae quidem enim ducimus vel quas natus cupiditate dignissimos voluptates numquam, aliquam perspiciatis.</p>
+
+              </div>
+              {%endif%}
         </div>
 {% endblock %}

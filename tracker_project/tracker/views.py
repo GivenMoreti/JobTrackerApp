@@ -1,14 +1,28 @@
 from django.shortcuts import render,redirect
-from . models import Tracker,Driver,Chat
+from . models import Tracker,Driver,Chat,Car
 from .forms import DriverForm,TrackerForm,ChatForm
 from django.db.models import Count
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-
+from .forms import SearchForm
 
 # Create your views here.
+def search(request):
+    form = SearchForm(request.GET)
+    results = []
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        results = Car.objects.filter(name__icontains=query)
+
+    context = {
+        'form': form, "results": results
+    }
+    return render(request, "tracker/search_results.html", context)
+
+
+
 def index(request):
     tracker = Tracker.objects.all()
     jobs_count = Tracker.objects.count()

@@ -3,7 +3,11 @@ from django.contrib import admin
 # Register your models here.
 from .models import Tracker
 from .models import Driver
-from .models import Chat
+from .models import Chat,Car,Category
+
+
+class CarAdmin(admin.ModelAdmin):
+    list_display = ('name','model','year')
 
 class DriverAdmin(admin.ModelAdmin):
     list_display = ('first_name','last_name','email',)
@@ -18,3 +22,5 @@ class ChatAdmin(admin.ModelAdmin):
 admin.site.register(Tracker,TrackerAdmin)
 admin.site.register(Driver,DriverAdmin)
 admin.site.register(Chat,ChatAdmin)
+admin.site.register(Car,CarAdmin)
+admin.site.register(Category)
